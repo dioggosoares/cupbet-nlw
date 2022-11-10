@@ -5,11 +5,17 @@ import { Input } from './Input'
 
 interface TeamProps {
   code: string
+  teamPoint?: string
   position: 'left' | 'right'
   onChangeText: (value: string) => void
 }
 
-export function Team({ code, position, onChangeText }: TeamProps) {
+export function FirstTeam({
+  code,
+  teamPoint,
+  position,
+  onChangeText,
+}: TeamProps) {
   return (
     <HStack alignItems="center">
       {position === 'left' && (
@@ -23,6 +29,8 @@ export function Team({ code, position, onChangeText }: TeamProps) {
         fontSize="xs"
         keyboardType="numeric"
         onChangeText={onChangeText}
+        value={teamPoint}
+        isDisabled={!!teamPoint}
       />
 
       {position === 'right' && (

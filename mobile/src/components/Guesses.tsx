@@ -17,6 +17,7 @@ interface GuessesProps {
 
 export function Guesses({ poolId, code }: GuessesProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingConfirmGuess, setIsLoadingConfirmGuess] = useState(false)
   const [games, setGames] = useState<GameData[]>([])
   const [firstTeamPoints, setFirstTeamPoints] = useState('')
   const [secondTeamPoints, setSecondTeamPoints] = useState('')
@@ -44,6 +45,8 @@ export function Guesses({ poolId, code }: GuessesProps) {
 
   async function handleGuessConfirm(gameId: string) {
     try {
+      setIsLoadingConfirmGuess(true)
+
       if (!firstTeamPoints.trim() || !secondTeamPoints.trim()) {
         return toast.show({
           title: 'Informe o placar do palpite',
@@ -77,6 +80,8 @@ export function Guesses({ poolId, code }: GuessesProps) {
         placement: 'top',
         bgColor: 'red.500',
       })
+    } finally {
+      setIsLoadingConfirmGuess(false)
     }
   }
 
@@ -100,6 +105,7 @@ export function Guesses({ poolId, code }: GuessesProps) {
           setFirstTeamPoints={setFirstTeamPoints}
           setSecondTeamPoints={setSecondTeamPoints}
           onGuessConfirm={() => handleGuessConfirm(item.id)}
+          isLoadingConfirmGuess={isLoadingConfirmGuess}
         />
       )}
       showsVerticalScrollIndicator={false}

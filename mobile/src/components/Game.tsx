@@ -4,11 +4,13 @@ import { getName, overwrite } from 'country-list'
 import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
 
-import { Team } from './Team'
+import { FirstTeam } from './FirstTeam'
+import { SecondTeam } from './SecondTeam'
 import { GameData } from '../@types/game'
 
 interface GameProps {
   data: GameData
+  isLoadingConfirmGuess: boolean
   onGuessConfirm: () => void
   setFirstTeamPoints: (value: string) => void
   setSecondTeamPoints: (value: string) => void
@@ -30,14 +32,6 @@ overwrite([
   {
     code: 'IR',
     name: 'Iran',
-  },
-  {
-    code: 'FR',
-    name: 'França',
-  },
-  {
-    code: 'AU',
-    name: 'Austrália',
   },
   {
     code: 'SN',
@@ -63,6 +57,94 @@ overwrite([
     code: 'SA',
     name: 'Arábia Saudita',
   },
+  {
+    code: 'DK',
+    name: 'Dinamarca',
+  },
+  {
+    code: 'TN',
+    name: 'Tunísia',
+  },
+  {
+    code: 'MX',
+    name: 'México',
+  },
+  {
+    code: 'PL',
+    name: 'Polônia',
+  },
+  {
+    code: 'FR',
+    name: 'França',
+  },
+  {
+    code: 'AU',
+    name: 'Austrália',
+  },
+  {
+    code: 'MA',
+    name: 'Marrocos',
+  },
+  {
+    code: 'HR',
+    name: 'Croácia',
+  },
+  {
+    code: 'DE',
+    name: 'Alemanha',
+  },
+  {
+    code: 'JP',
+    name: 'Japão',
+  },
+  {
+    code: 'ES',
+    name: 'Espanha',
+  },
+  {
+    code: 'CR',
+    name: 'Costa Rica',
+  },
+  {
+    code: 'BE',
+    name: 'Bélgica',
+  },
+  {
+    code: 'CA',
+    name: 'Canadá',
+  },
+  {
+    code: 'CH',
+    name: 'Suíça',
+  },
+  {
+    code: 'CM',
+    name: 'Camarões',
+  },
+  {
+    code: 'UY',
+    name: 'Uruguai',
+  },
+  {
+    code: 'KR',
+    name: 'Coreia do Sul',
+  },
+  {
+    code: 'PT',
+    name: 'Portugal',
+  },
+  {
+    code: 'GH',
+    name: 'Gana',
+  },
+  {
+    code: 'BR',
+    name: 'Brasil',
+  },
+  {
+    code: 'RS',
+    name: 'Sérvia',
+  },
 ])
 
 export function Game({
@@ -70,6 +152,7 @@ export function Game({
   setFirstTeamPoints,
   setSecondTeamPoints,
   onGuessConfirm,
+  isLoadingConfirmGuess,
 }: GameProps) {
   const { colors, sizes } = useTheme()
 
@@ -103,18 +186,20 @@ export function Game({
         justifyContent="space-between"
         alignItems="center"
       >
-        <Team
+        <FirstTeam
           code={data.firstTeamCountryCode}
           position="right"
           onChangeText={setFirstTeamPoints}
+          teamPoint={data.guess ? String(data?.guess?.firstTeamPoints) : ''}
         />
 
         <X color={colors.gray[300]} size={sizes[6]} />
 
-        <Team
+        <SecondTeam
           code={data.secondTeamCountryCode}
           position="left"
           onChangeText={setSecondTeamPoints}
+          teamPoint={data.guess ? String(data?.guess?.secondTeamPoints) : ''}
         />
       </HStack>
 
@@ -125,6 +210,7 @@ export function Game({
           bgColor="green.500"
           mt={4}
           onPress={onGuessConfirm}
+          isLoading={isLoadingConfirmGuess}
         >
           <HStack alignItems="center">
             <Text color="white" fontSize="xs" fontFamily="heading" mr={3}>

@@ -3,6 +3,7 @@ import { Heading, HStack, Text, VStack } from 'native-base'
 
 import { Participants } from './Participants'
 import { PoolCardData } from '../@types/poolcard'
+import { capitalizeLetters } from '../utils/shortStrings'
 
 interface PoolCardProps extends TouchableOpacityProps {
   data: PoolCardData
@@ -29,7 +30,8 @@ export function PoolCard({ data, ...rest }: PoolCardProps) {
           </Heading>
 
           <Text color="gray.200" fontSize="xs">
-            Criado por {data.owner.name}
+            Criado por {data.owner.name.split(' ')[0]}{' '}
+            {capitalizeLetters(data.owner.name.split(' ')[1])}.
           </Text>
         </VStack>
 

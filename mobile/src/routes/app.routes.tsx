@@ -34,20 +34,20 @@ export function AppRoutes() {
       }}
     >
       <Screen
-        name="new"
-        component={NewPool}
-        options={{
-          tabBarIcon: ({ color }) => <PlusCircle color={color} size={size} />,
-          tabBarLabel: 'Novo bolão',
-        }}
-      />
-
-      <Screen
         name="pools"
         component={Pools}
         options={{
           tabBarIcon: ({ color }) => <SoccerBall color={color} size={size} />,
           tabBarLabel: 'Meus bolões',
+        }}
+      />
+
+      <Screen
+        name="new"
+        component={NewPool}
+        options={{
+          tabBarIcon: ({ color }) => <PlusCircle color={color} size={size} />,
+          tabBarLabel: 'Novo bolão',
         }}
       />
 

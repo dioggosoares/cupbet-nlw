@@ -12,6 +12,7 @@ export const THEME = extendTheme({
     },
     green: {
       500: '#047C3F',
+      600: '#015F2F',
     },
     yellow: {
       500: '#F7DD43',
