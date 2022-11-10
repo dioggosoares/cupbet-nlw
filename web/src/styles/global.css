@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+body {
+  @apply bg-gray-900 bg-app bg-no-repeat bg-cover;
+  -webkit-font-smoothing: antialiased;
+}
+
+.toastProgress {
+  background: #E3C305 !important;
+}
+
+.toastBody {
+  background: #202024 !important;
+  color: #e1e1e6;
+  text-align: center;
+}

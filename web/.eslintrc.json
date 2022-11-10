@@ -1,0 +1,7 @@
+{
+  "extends": "@primittive/eslint-config/react",
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-unreachable": "off"
+  }
+}
