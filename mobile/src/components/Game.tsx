@@ -1,6 +1,6 @@
 import { Button, HStack, Text, useTheme, VStack } from 'native-base'
 import { X, Check } from 'phosphor-react-native'
-import { getName } from 'country-list'
+import { getName, overwrite } from 'country-list'
 import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
 
@@ -13,6 +13,57 @@ interface GameProps {
   setFirstTeamPoints: (value: string) => void
   setSecondTeamPoints: (value: string) => void
 }
+
+overwrite([
+  {
+    code: 'QA',
+    name: 'Catar',
+  },
+  {
+    code: 'EC',
+    name: 'Equador',
+  },
+  {
+    code: 'GB-ENG',
+    name: 'Inglaterra',
+  },
+  {
+    code: 'IR',
+    name: 'Iran',
+  },
+  {
+    code: 'FR',
+    name: 'França',
+  },
+  {
+    code: 'AU',
+    name: 'Austrália',
+  },
+  {
+    code: 'SN',
+    name: 'Senegal',
+  },
+  {
+    code: 'NL',
+    name: 'Holanda',
+  },
+  {
+    code: 'US',
+    name: 'Estados Unidos',
+  },
+  {
+    code: 'GB-WLS',
+    name: 'País de Gales',
+  },
+  {
+    code: 'AR',
+    name: 'Argentina',
+  },
+  {
+    code: 'SA',
+    name: 'Arábia Saudita',
+  },
+])
 
 export function Game({
   data,
