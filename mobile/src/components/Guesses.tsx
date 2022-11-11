@@ -85,6 +85,16 @@ export function Guesses({ poolId, code }: GuessesProps) {
     }
   }
 
+  const renderItem = ({ item }) => (
+    <Game
+      data={item}
+      setFirstTeamPoints={setFirstTeamPoints}
+      setSecondTeamPoints={setSecondTeamPoints}
+      onGuessConfirm={() => handleGuessConfirm(item.id)}
+      isLoadingConfirmGuess={isLoadingConfirmGuess}
+    />
+  )
+
   useFocusEffect(
     useCallback(() => {
       fetchGames()
@@ -99,20 +109,12 @@ export function Guesses({ poolId, code }: GuessesProps) {
     <FlatList
       data={games}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <Game
-          data={item}
-          setFirstTeamPoints={setFirstTeamPoints}
-          setSecondTeamPoints={setSecondTeamPoints}
-          onGuessConfirm={() => handleGuessConfirm(item.id)}
-          isLoadingConfirmGuess={isLoadingConfirmGuess}
-        />
-      )}
+      renderItem={renderItem}
       showsVerticalScrollIndicator={false}
+      ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
       _contentContainerStyle={{
         pb: 20,
       }}
-      ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
     />
   )
 }
