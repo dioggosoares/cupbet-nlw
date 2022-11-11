@@ -24,32 +24,6 @@ export async function gameRoutes(fastify: FastifyInstance) {
         parseInt(page || '0'),
       )
       reply.send(data)
-
-      // const games = await prisma.game.findMany({
-      //   orderBy: {
-      //     date: 'asc',
-      //   },
-      //   include: {
-      //     guesses: {
-      //       where: {
-      //         participant: {
-      //           userId: request.user.sub,
-      //           poolId: id,
-      //         },
-      //       },
-      //     },
-      //   },
-      // })
-
-      // return {
-      //   games: games.map((game) => {
-      //     return {
-      //       ...game,
-      //       guess: game.guesses.length > 0 ? game.guesses[0] : null,
-      //       guesses: undefined,
-      //     }
-      //   }),
-      // }
     },
   )
 }
