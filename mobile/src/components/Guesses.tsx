@@ -17,19 +17,28 @@ interface GuessesProps {
 
 export function Guesses({ poolId, code }: GuessesProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isListItemLoading, setIsListItemLoading] = useState(false)
   const [isLoadingConfirmGuess, setIsLoadingConfirmGuess] = useState(false)
   const [games, setGames] = useState<GameData[]>([])
   const [firstTeamPoints, setFirstTeamPoints] = useState('')
   const [secondTeamPoints, setSecondTeamPoints] = useState('')
+  const [page, setPage] = useState(0)
 
   const toast = useToast()
 
-  async function fetchGames() {
-    try {
-      setIsLoading(true)
+  const page_size = 3
 
-      const response = await api.get(`/pools/${poolId}/games`)
-      setGames(response.data.games)
+  async function fetchGames(more: boolean = false) {
+    try {
+      if (!more) setIsLoading(true)
+
+      setIsListItemLoading(true)
+      const response = await api.get(
+        `/pools/${poolId}/games?page_size=${page_size}&page=${page} `,
+      )
+      setGames([...games, ...response.data.games])
+      setPage(page + 1)
+      setIsListItemLoading(false)
     } catch (error) {
       console.log(error)
 
@@ -40,6 +49,7 @@ export function Guesses({ poolId, code }: GuessesProps) {
       })
     } finally {
       setIsLoading(false)
+      setIsListItemLoading(false)
     }
   }
 
@@ -112,6 +122,9 @@ export function Guesses({ poolId, code }: GuessesProps) {
       renderItem={renderItem}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
+      onEndReached={() => fetchGames(true)}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={isListItemLoading && <Loading />}
       _contentContainerStyle={{
         pb: 20,
       }}

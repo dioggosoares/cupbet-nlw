@@ -64,7 +64,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
         await AsyncStorage.setItem(
           '@cupbet-app-1.0.0',
-          JSON.stringify(tokenResponse.data.token),
+          tokenResponse.data.token,
         )
       }
     } catch (error) {
@@ -77,7 +77,13 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
   async function retrieveToken() {
     const storageToken = await AsyncStorage.getItem('@cupbet-app-1.0.0')
-    setToken(JSON.parse(storageToken))
+    if (storageToken) {
+      const userInfoResponse = await api.get('/me')
+      api.defaults.headers.common.Authorization = `Bearer ${storageToken}`
+
+      setUser(userInfoResponse.data.user)
+      setToken(storageToken)
+    }
   }
 
   useEffect(() => {

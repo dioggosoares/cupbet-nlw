@@ -28,9 +28,15 @@ async function bootstrap() {
   await fastify.register(guessRoutes)
   await fastify.register(authRoutes)
 
+  const { NODE_ENV } = process.env
+
+  const port = 3333
+  let host: string
+  NODE_ENV === 'PROD' ? (host = '0.0.0.0') : (host = 'localhost')
+
   await fastify.listen({
-    port: 3333,
-    host: '0.0.0.0',
+    port,
+    host,
   })
 }
 
