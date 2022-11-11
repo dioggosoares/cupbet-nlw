@@ -16,6 +16,7 @@ interface GameProps {
   setSecondTeamPoints: (value: string) => void
 }
 
+// Rename country names for portuguese
 overwrite([
   {
     code: 'QA',
@@ -210,6 +211,9 @@ export function Game({
           bgColor="green.500"
           mt={4}
           onPress={onGuessConfirm}
+          _pressed={{
+            bg: 'green.600',
+          }}
           isLoading={isLoadingConfirmGuess}
         >
           <HStack alignItems="center">

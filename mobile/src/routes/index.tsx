@@ -9,8 +9,6 @@ import { useAuth } from '../hooks/useAuth'
 export function Routes() {
   const { user, token } = useAuth()
 
-  // console.log('storaged token', token)
-
   return (
     <Box flex={1} bgColor="gray.900">
       <NavigationContainer>

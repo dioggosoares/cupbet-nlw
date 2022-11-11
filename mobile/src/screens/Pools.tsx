@@ -22,7 +22,7 @@ export function Pools() {
   async function fetchPools() {
     try {
       setIsLoading(true)
-      const response = await api.get('pools')
+      const response = await api.get('/pools')
       setPools(response.data.pools)
     } catch (error) {
       console.log(error)

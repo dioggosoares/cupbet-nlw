@@ -60,6 +60,8 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
       if (userInfoResponse && tokenResponse) {
         setUser(userInfoResponse.data.user)
+        setToken(tokenResponse.data.token)
+
         await AsyncStorage.setItem(
           '@cupbet-app-1.0.0',
           JSON.stringify(tokenResponse.data.token),
@@ -82,8 +84,11 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
     if (response?.type === 'success' && response.authentication?.accessToken) {
       signInWithGoogle(response.authentication.accessToken)
     }
-    retrieveToken()
   }, [response])
+
+  useEffect(() => {
+    retrieveToken()
+  }, [])
 
   return (
     <AuthContext.Provider
