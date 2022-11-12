@@ -1,11 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { PlusCircle, SoccerBall } from 'phosphor-react-native'
-import { useTheme } from 'native-base'
+import { PlusCircle, SoccerBall, User } from 'phosphor-react-native'
+import { Flex, useTheme } from 'native-base'
 
 import { Details } from '../screens/Details'
 import { FindPool } from '../screens/FindPool'
 import { NewPool } from '../screens/NewPool'
 import { Pools } from '../screens/Pools'
+import { SignIn } from '../screens/SignIn'
+import { Profile } from '../screens/Profile'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -30,24 +32,54 @@ export function AppRoutes() {
         tabBarItemStyle: {
           position: 'relative',
           top: 0,
+          left: 12,
         },
       }}
+      initialRouteName="pools"
     >
-      <Screen
-        name="pools"
-        component={Pools}
-        options={{
-          tabBarIcon: ({ color }) => <SoccerBall color={color} size={size} />,
-          tabBarLabel: 'Meus bolões',
-        }}
-      />
-
       <Screen
         name="new"
         component={NewPool}
         options={{
-          tabBarIcon: ({ color }) => <PlusCircle color={color} size={size} />,
-          tabBarLabel: 'Novo bolão',
+          tabBarIcon: ({ color }) => (
+            <Flex>
+              <PlusCircle color={color} size={size} />
+            </Flex>
+          ),
+          tabBarLabel: '',
+        }}
+      />
+
+      <Screen
+        name="pools"
+        component={Pools}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Flex
+              bgColor="gray.800"
+              borderWidth={2}
+              borderColor="gray.700"
+              p={3}
+              mb={6}
+              rounded={99999}
+            >
+              <SoccerBall color={color} size={36} />
+            </Flex>
+          ),
+          tabBarLabel: '',
+        }}
+      />
+
+      <Screen
+        name="profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Flex>
+              <User color={color} size={size} />
+            </Flex>
+          ),
+          tabBarLabel: '',
         }}
       />
 
@@ -60,6 +92,12 @@ export function AppRoutes() {
       <Screen
         name="details"
         component={Details}
+        options={{ tabBarButton: () => null }}
+      />
+
+      <Screen
+        name="signin"
+        component={SignIn}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>

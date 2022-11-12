@@ -11,6 +11,7 @@ import { PoolCard } from '../components/PoolCard'
 import { api } from '../services/api'
 import { EmptyPoolList } from '../components/EmptyPoolList'
 import { PoolCardData } from '../@types/poolcard'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function Pools() {
   const [isLoading, setIsLoading] = useState(true)
