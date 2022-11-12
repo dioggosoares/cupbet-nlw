@@ -56,12 +56,12 @@ export function AppRoutes() {
         options={{
           tabBarIcon: ({ color }) => (
             <Flex
-              bgColor="gray.800"
-              borderWidth={2}
-              borderColor="gray.700"
+              bgColor="gray.700"
+              borderWidth={7}
+              borderColor="gray.800"
               p={3}
               mb={6}
-              rounded={99999}
+              rounded={999}
             >
               <SoccerBall color={color} size={36} />
             </Flex>
