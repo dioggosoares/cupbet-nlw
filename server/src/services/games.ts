@@ -1,6 +1,6 @@
 import { prisma } from '../lib/prisma'
 
-class Games {
+export class Games {
   async getGames(id: string, sub: string, pageSize: number, page: number) {
     const page_size = pageSize
     const games = await prisma.game.findMany({
@@ -36,5 +36,3 @@ class Games {
     }
   }
 }
-
-export default new Games()

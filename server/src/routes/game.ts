@@ -1,8 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 
-// import { prisma } from '../lib/prisma'
-import Games from '../services/games'
+import { Games } from '../services/games'
 import { authenticate } from '../plugins/authenticate'
 
 export async function gameRoutes(fastify: FastifyInstance) {
@@ -16,8 +15,10 @@ export async function gameRoutes(fastify: FastifyInstance) {
 
       const { id } = getPoolParams.parse(request.params)
 
+      const gameResolver = new Games()
+
       const { page_size, page }: any = request.query
-      const data = await Games.getGames(
+      const data = await gameResolver.getGames(
         id,
         request.user.sub,
         parseInt(page_size),
